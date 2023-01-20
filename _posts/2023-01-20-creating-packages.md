@@ -28,7 +28,7 @@ package = simple_asset_package("my-image.tiff",  parent_folder=folder)
 ```
 
 This will create a zipped package with the correct metadata and content ready for upload and ingest. 
-The path to the newly created pacakge is returned from the function.
+The path to the newly created package is returned from the function.
 
 To use this in a complete Python script which also uploads the package to Preservica, we pass the path to the package to an upload method. 
 
@@ -46,4 +46,18 @@ client.upload_zip_package(package)
 ```
 
 Here folder is the UUID of the parent collection the Asset should be ingested into.
+
+If we also have an alternative version of the TIFF image such as a JPG file which we would like to be the access version, then we would use the same script, but add the access version as the second argument.
+
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+package = simple_asset_package("my-image.tiff", "my-image.jpg", parent_folder=folder)
+client.upload_zip_package(package)
+
+```
+
+
 
