@@ -19,5 +19,5 @@ Simple packages can be represented by the following diagram:
 Simple packages can optionally contain additional descriptive metadata and 3rd party identifiers.
 To create a package containing a single Asset with one preservation object which will be a child of a specified folder we can use the following Python code:
 
-  package = simple_asset_package("my-image.tiff",  parent_folder=folder)
+        package = simple_asset_package("my-image.tiff",  parent_folder=folder)
 
