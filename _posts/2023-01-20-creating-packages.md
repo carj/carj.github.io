@@ -16,14 +16,34 @@ Simple packages can be represented by the following diagram:
 
  ![Asset](https://pypreservica.readthedocs.io/en/latest/_images/simple_asset_package.png)
  
-Simple packages can optionally contain additional descriptive metadata and 3rd party identifiers.
-To create a package containing a single Asset with one preservation object which will be a child of a specified folder we can use the following Python code:
+Simple packages contain one Content Object inside the preservation Representation and a single Content Object within an optional access Representation.
+ 
+Simple packages can optionally contain additional descriptive metadata and 3rd party identifiers attached to the Asset.
+
+To create a package containing a single Asset with one preservation object which will become the child of an existing folder or collection 
+we can use the following Python code:
 
 ```python
 package = simple_asset_package("my-image.tiff",  parent_folder=folder)
 ```
 
-This will create a zipped package with the correct metadata and content ready for upload and ingest. The path to the newly created pacakge is returned from the function.
+This will create a zipped package with the correct metadata and content ready for upload and ingest. 
+The path to the newly created pacakge is returned from the function.
 
-To use this in a complete Python script which also uploads the package to Preservica we pass the path to the package to an upload method. 
+To use this in a complete Python script which also uploads the package to Preservica, we pass the path to the package to an upload method. 
+
+
 For example we would have:
+
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+package = simple_asset_package("my-image.tiff",  parent_folder=folder)
+client.upload_zip_package(package)
+
+```
+
+Here folder is the UUID of the parent collection the Asset should be ingested into.
+
