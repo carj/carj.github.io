@@ -21,3 +21,7 @@ To create a package containing a single Asset with one preservation object which
 
         package = simple_asset_package("my-image.tiff",  parent_folder=folder)
 
+This will create a zipped package with the correct metadata and content ready for upload and ingest. The path to the newly created pacakge is returned from the function.
+
+To use this in a complete Python script which also uploads the package to Preservica we pass the path to the package to an upload method. 
+For example we would have:
