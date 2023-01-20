@@ -11,7 +11,7 @@ title:            James Carr
 tagline:          'Fast Preservation'
 description:      'Personal Blog'
 url:              https://carj.github.io/
-baseurl:          /
+baseurl:          https://carj.github.io/
 
 author:
   name:           'James Carr'
