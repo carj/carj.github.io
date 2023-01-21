@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating Preservica Packages using the Python SDK
+title: Creating Preservica Packages using the pyPreservica Python SDK
 ---
 
 
