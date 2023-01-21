@@ -97,3 +97,14 @@ client.upload_zip_package(package)
 
 
 ```
+
+Which will now populate the following fields.
+
+![Preservica Asset](/public/images/asset4.png)
+
+
+###  Multi-part Packages
+
+If your Assets consists of multiple digital objects, for example a book with multiple pages or a multi-media object such an mp4 file and a text file containing subtitles etc. then you will need to use the function `complex_asset_package()` method.
+
+
