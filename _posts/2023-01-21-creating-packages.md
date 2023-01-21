@@ -149,6 +149,9 @@ client.upload_zip_package(package)
 
 Preservica Assets can contain multiple 3rd party external identifiers.
 
+Identifiers are attached to Assets by adding them to a Python dictionary object, the dictionary key is the identifier type and the 
+identifiers is set as the dictionary value.
+
 ```python
 
 identifiers = {"DOI": "doi:10.1038/nphys1170", "ISBN": "978-3-16-148410-0"}
