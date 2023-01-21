@@ -147,3 +147,11 @@ client.upload_zip_package(package)
 
 ###  Descriptive Metadata
 
+Preservica Assets can contain multiple 3rd party external identifiers.
+
+```python
+
+identifiers = {"DOI": "doi:10.1038/nphys1170", "ISBN": "978-3-16-148410-0"}
+
+```
+
