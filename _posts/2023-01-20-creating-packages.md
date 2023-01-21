@@ -81,7 +81,7 @@ We can override that default behaviour by explicitly setting the Asset title and
 from pyPreservica import *
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
-package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title=”Asset Title”, Description=”Asset Description”)
+package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title="Asset Title", Description="Asset Description")
 client.upload_zip_package(package)
 
 ```
@@ -94,7 +94,7 @@ We can also override the default “open” security tag on the Asset.
 from pyPreservica import *
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
-package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title=”Asset Title”, Description=”Asset Description”,  SecurityTag=”closed” )
+package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title="Asset Title", Description="Asset Description",  SecurityTag="closed" )
 client.upload_zip_package(package)
 
 
