@@ -11,8 +11,8 @@ I am a software developer & consultant working in Digital Preservation for [Pres
 
 I am the creator and maintainer of a few open source tools for Preservica users, these include:
 
-. [pyPreservica](https://pypreservica.readthedocs.io/) Python SDK for Preservica.
-. [CSV to XML](https://pypreservica.pythonanywhere.com/)  Spreadsheet Converter
+* [pyPreservica](https://pypreservica.readthedocs.io/) Python SDK for Preservica.
+* [CSV to XML](https://pypreservica.pythonanywhere.com/)  Spreadsheet Converter
 
 
 
