@@ -95,7 +95,6 @@ folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title="Asset Title", Description="Asset Description",  SecurityTag="closed" )
 client.upload_zip_package(package)
 
-
 ```
 
 Which will now populate the following fields.
@@ -106,5 +105,40 @@ Which will now populate the following fields.
 ###  Multi-part Packages
 
 If your Assets consists of multiple digital objects, for example a book with multiple pages or a multi-media object such an mp4 file and a text file containing subtitles etc. then you will need to use the function `complex_asset_package()` method.
+
+
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+
+files = ["video.mp4", "video.srt"]
+
+package = complex_asset_package(files,  parent_folder=folder)
+client.upload_zip_package(package)
+
+```
+
+This function works in the same way as the `simple_asset_package()` method, apart from that it accepts lists of objects, rather than a single object.
+You can also pass a list of access objects, the number of preservation and access objects do not have to be equal, 
+for example you can have fewer access objects in the Asset.
+
+
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+
+pres_files = ["page1.tiff", "page2.tiff", "page3.tiff"]
+access_files = ["book.pdf"]
+
+package = complex_asset_package(pres_files, access_files, parent_folder=folder)
+client.upload_zip_package(package)
+
+```
+
+`complex_asset_package()` will always retain the order of the objects in the lists, this way you can preserve the correct ordering of objects which is useful when rendering the Asset. 
 
 
