@@ -66,5 +66,31 @@ Which will give you the following Asset:
 
 ![Preservica Asset](/public/images/asset2.png)
 
+By default simple_asset_package() uses the file name as the default Asset title and description, in this case the default title would be “my-image”.
+
+![Preservica Asset](/public/images/asset3.png)
+
+We can override that default behaviour by explicitly setting the Asset title and description by passing them as arguments to the function using optional keywords.
+
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title=”Asset Title”, Description=”Asset Description”)
+client.upload_zip_package(package)
+
+```
+
+We can also override the default “open” security tag on the Asset.
 
 
+```python
+
+from pyPreservica import *
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title=”Asset Title”, Description=”Asset Description”,  SecurityTag=”closed” )
+client.upload_zip_package(package)
+
+```
