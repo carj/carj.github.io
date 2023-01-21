@@ -47,9 +47,7 @@ client.upload_zip_package(package)
 
 Here folder is the UUID of the parent collection the Asset should be ingested into.
 
-!!! note
-
-  For details on how to authenticate the pyPreservica client with your Preservica system see the section on [Authentication](https://pypreservica.readthedocs.io/en/latest/intro.html#authentication) in the pyPreservica documentation.
+> **_NOTE:_**  For details on how to authenticate the pyPreservica client with your Preservica system see the section on [Authentication](https://pypreservica.readthedocs.io/en/latest/intro.html#authentication) in the pyPreservica documentation.
 
 After ingest you should see the following in Preservica.
 
