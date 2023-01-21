@@ -47,6 +47,10 @@ client.upload_zip_package(package)
 
 Here folder is the UUID of the parent collection the Asset should be ingested into.
 
+After ingest you should see the following in Preservica.
+
+![Preservica Asset](/public/images/asset1.png)
+
 If we also have an alternative version of the TIFF image such as a JPG file which we would like to be the access version, then we would use the same script, but add the access version as the second argument.
 
 ```python
