@@ -131,7 +131,7 @@ from pyPreservica import *
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 
-pres_files = ["page1.tiff", "page2.tiff", "page3.tiff"]
+pres_files = ["page1.tif", "page2.tif", "page3.tif"]
 access_files = ["book.pdf"]
 
 package = complex_asset_package(pres_files, access_files, parent_folder=folder)
@@ -141,4 +141,9 @@ client.upload_zip_package(package)
 
 `complex_asset_package()` will always retain the order of the objects in the lists, this way you can preserve the correct ordering of objects which is useful when rendering the Asset. 
 
+
+![Preservica Asset](/public/images/asset5.png)
+
+
+###  Descriptive Metadata
 
