@@ -62,6 +62,9 @@ package = simple_asset_package("my-image.tiff", "my-image.jpg", parent_folder=fo
 client.upload_zip_package(package)
 
 ```
+Which will give you the following Asset:
+
+![Preservica Asset](/public/images/asset2.png)
 
 
 
