@@ -47,6 +47,10 @@ client.upload_zip_package(package)
 
 Here folder is the UUID of the parent collection the Asset should be ingested into.
 
+!!! note
+
+  For details on how to authenticate the pyPreservica client with your Preservica system see the section on [Authentication](https://pypreservica.readthedocs.io/en/latest/intro.html#authentication) in the pyPreservica documentation.
+
 After ingest you should see the following in Preservica.
 
 ![Preservica Asset](/public/images/asset1.png)
@@ -66,7 +70,7 @@ Which will give you the following Asset:
 
 ![Preservica Asset](/public/images/asset2.png)
 
-By default simple_asset_package() uses the file name as the default Asset title and description, in this case the default title would be “my-image”.
+By default `simple_asset_package()` uses the file name as the default Asset title and description, in this case the default title would be “my-image”.
 
 ![Preservica Asset](/public/images/asset3.png)
 
