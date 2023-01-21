@@ -97,4 +97,5 @@ folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title=”Asset Title”, Description=”Asset Description”,  SecurityTag=”closed” )
 client.upload_zip_package(package)
 
+
 ```
