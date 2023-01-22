@@ -78,8 +78,8 @@ By default `simple_asset_package()` uses the file name as the default Asset titl
 We can override that default behaviour by explicitly setting the Asset title and description by passing them as arguments to the function using optional keywords.
 
 ```python
-
 from pyPreservica import *
+
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title="Asset Title", Description="Asset Description")
@@ -91,8 +91,8 @@ We can also override the default “open” security tag on the Asset.
 
 
 ```python
-
 from pyPreservica import *
+
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 package = simple_asset_package("my-image.tiff", "my-image.jpg",  parent_folder=folder, Title="Asset Title", Description="Asset Description",  SecurityTag="closed" )
@@ -111,8 +111,8 @@ If your Assets consists of multiple digital objects, for example a book with mul
 
 
 ```python
-
 from pyPreservica import *
+
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 
@@ -129,8 +129,8 @@ for example you can have fewer access objects in the Asset.
 
 
 ```python
-
 from pyPreservica import *
+
 client = UploadAPI()
 folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 
@@ -157,6 +157,10 @@ Instead of a list of objects you now pass a dictionary object, the key is the re
 
 
 ```python
+from pyPreservica import *
+
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
 
 preservation_rep = dict()
 preservation_rep["Master"] = ["page1.tif", "page2.tif"," page3.tif"]
