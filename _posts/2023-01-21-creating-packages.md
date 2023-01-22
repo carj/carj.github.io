@@ -145,16 +145,31 @@ client.upload_zip_package(package)
 ![Preservica Asset](/public/images/asset5.png)
 
 
-###  Descriptive Metadata
+###  Multiple Representations
 
-Preservica Assets can contain multiple 3rd party external identifiers.
+If you need more than one preservation or access representation then the method to use is `generic_asset_package()`, this provides the most flexibility when creating submissions at the price of slightly more complexity.
 
-Identifiers are attached to Assets by adding them to a Python dictionary object, the dictionary key is the identifier type and the 
-identifiers is set as the dictionary value.
+This function allows arbitrary numbers of both preservation and access representations to be created.
+Instead of a list of objects you now pass a dictionary object, the key is the representation name and the value is the list of files.
+
 
 ```python
 
-identifiers = {"DOI": "doi:10.1038/nphys1170", "ISBN": "978-3-16-148410-0"}
+preservation_rep = dict()
+preservation_rep ["Master"] = ["page1.tif", "page2.tif"," page3.tif"]
+preservation_rep ["BlackWhite"] = ["page1.tif", "page2.tif"," page3.tif"]
+preservation_rep ["Greyscale"] = ["page-1.tiff", "page-2.tiff"," page-3.tiff"]
+
+access_rep = dict()
+access_rep ["Multi-Page Access"] = ["page-1.jpg", "page-2.jpg"," page-3.jpg"]
+access_rep ["Single-Page Access"] = ["book.pdf"]
+
+package = generic_asset_package(preservation_rep, access_rep, parent_folder=folder)
+
 
 ```
+
+The additional keyword arguments used by `simple_asset_package()` and `complex_asset_package()` such as Title, Description etc are still available.
+Preservica will render the first access representation, so the viewer you want to use needs to be the first entry in the access dictionary. 
+For example above if you want to use the multi-page book viewer as the default renderer, make “Multi-Page Access” the first entry, if you want the PDF viewer to be the default renderer, then make “Single-Page Access” the first dictionary entry.
 
