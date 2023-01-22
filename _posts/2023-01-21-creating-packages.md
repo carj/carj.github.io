@@ -171,7 +171,9 @@ package = generic_asset_package(preservation_rep, access_rep, parent_folder=fold
 
 The additional keyword arguments used by `simple_asset_package()` and `complex_asset_package()` such as Title, Description etc are still available.
 Preservica will render the first access representation, so the viewer you want to use needs to be the first entry in the access dictionary. 
-For example above if you want to use the multi-page book viewer as the default renderer, make “Multi-Page Access” the first entry, if you want the PDF viewer to be the default renderer, then make “Single-Page Access” the first dictionary entry.
+
+Using the example above, if you want to use the multi-page book viewer as the default renderer, make “Multi-Page Access” the first entry, 
+if you want the PDF viewer to be the default renderer, then make “Single-Page Access” the first dictionary entry.
 
 ![Preservica Asset](/public/images/asset6.png)
 
