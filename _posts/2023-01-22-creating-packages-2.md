@@ -20,5 +20,32 @@ Identifier values do not have to be unique.
 
 The following shows a Preservica Asset with some common identifiers.
 
-
 ![indentifiers](/public/images/identifiers.png)
+
+We can add identifiers to submission packages by creating a Python dictionary of identifier keys and values and passing it to one of the package creation methods.
+
+For example to add two identifiers to our Asset we would create a dictionary object with two items.
+
+```python
+
+identifiers = {"DOI": "doi:10.1038/nphys1170", "ISBN": "978-3-16-148410-0"}
+
+```
+
+We set the value on the option Identifier argument:
+
+
+```python
+from pyPreservica import *
+
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+identifiers = {"DOI": "doi:10.1038/nphys1170", "ISBN": "978-3-16-148410-0"}
+
+package = simple_asset_package("my-image.tiff",  parent_folder=folder, Identifiers=identifiers)
+
+client.upload_zip_package(package)
+```
+
+
+
