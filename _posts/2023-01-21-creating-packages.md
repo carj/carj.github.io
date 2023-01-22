@@ -156,13 +156,13 @@ Instead of a list of objects you now pass a dictionary object, the key is the re
 ```python
 
 preservation_rep = dict()
-preservation_rep ["Master"] = ["page1.tif", "page2.tif"," page3.tif"]
-preservation_rep ["BlackWhite"] = ["page1.tif", "page2.tif"," page3.tif"]
-preservation_rep ["Greyscale"] = ["page-1.tiff", "page-2.tiff"," page-3.tiff"]
+preservation_rep["Master"] = ["page1.tif", "page2.tif"," page3.tif"]
+preservation_rep["Black White"] = ["page1.tif", "page2.tif"," page3.tif"]
+preservation_rep["Greyscale"] = ["page1.tiff", "page2.tiff"," page3.tiff"]
 
 access_rep = dict()
-access_rep ["Multi-Page Access"] = ["page-1.jpg", "page-2.jpg"," page-3.jpg"]
-access_rep ["Single-Page Access"] = ["book.pdf"]
+access_rep["Multi-Page Access"] = ["page-1.jpg", "page-2.jpg"," page-3.jpg"]
+access_rep["Single-Page Access"] = ["book.pdf"]
 
 package = generic_asset_package(preservation_rep, access_rep, parent_folder=folder)
 
