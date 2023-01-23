@@ -61,7 +61,6 @@ metadata = {""http://www.openarchives.org/OAI/2.0/oai_dc/" ": "./metadata/dc.xml
 You can use any metadata which is a well formed XML document. The dictionary object can contain as many XML documents as you need.
 
 
-
 ```python
 from pyPreservica import *
 
@@ -73,3 +72,37 @@ package = simple_asset_package("my-image.tiff",  parent_folder=folder, Asset_Met
 
 client.upload_zip_package(package)
 ```
+
+### Fixity
+
+By default the `simple_asset_package()` and `complex_asset_package()` routines will create packages which contain SHA1 fixity values for each file.
+
+You can override this default behaviour through the use of the callback options. The pyPreservica library provides default callbacks for SHA-1, SHA256 & SHA512
+
+For example if you want to use SHA256 as your fixity algorithm on the preservation files use:
+
+```python
+from pyPreservica import *
+
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+
+package = simple_asset_package("my-image.tiff",  parent_folder=folder, Preservation_files_fixity_callback=Sha256FixityCallBack)
+
+client.upload_zip_package(package)
+```
+
+You can even choose to have different fixity algorithms for the preservaton files and the access files
+
+```python
+from pyPreservica import *
+
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+
+package = simple_asset_package("my-image.tiff",  "my-image.jpg", parent_folder=folder, Preservation_files_fixity_callback=Sha512FixityCallBack,  Access_files_fixity_callback=Sha256FixityCallBack)
+
+client.upload_zip_package(package)
+```
+
+
