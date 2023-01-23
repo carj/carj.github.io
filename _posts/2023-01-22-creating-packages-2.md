@@ -47,5 +47,29 @@ package = simple_asset_package("my-image.tiff",  parent_folder=folder, Identifie
 client.upload_zip_package(package)
 ```
 
+### Descriptive Metadata
+
+Descriptive metadata is added to the package in a similar way to the 3rd party identifiers, you create a python dictionary object and populate the dictonary key 
+with the descriptive metadata schema namespace and the value of the dictionary object is a path to the xml document you would like to use.
+
+```python
+
+metadata = {""http://www.openarchives.org/OAI/2.0/oai_dc/" ": "./metadata/dc.xml"}
+
+```
+
+You can use any metadata which is a well formed XML document. The dictionary object can contain as many XML documents as you need.
 
 
+
+```python
+from pyPreservica import *
+
+client = UploadAPI()
+folder = "9fd239eb-19a3-4a46-9495-40fd9a5d8f93"
+metadata = {"http://www.openarchives.org/OAI/2.0/oai_dc/": "./metadata/dc.xml"}
+
+package = simple_asset_package("my-image.tiff",  parent_folder=folder, Asset_Metadata=metadata)
+
+client.upload_zip_package(package)
+```
