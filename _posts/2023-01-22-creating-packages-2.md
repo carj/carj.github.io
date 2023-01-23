@@ -54,7 +54,7 @@ with the descriptive metadata schema namespace and the value of the dictionary o
 
 ```python
 
-metadata = {""http://www.openarchives.org/OAI/2.0/oai_dc/" ": "./metadata/dc.xml"}
+metadata = {"http://www.openarchives.org/OAI/2.0/oai_dc/": "./metadata/dc.xml"}
 
 ```
 
