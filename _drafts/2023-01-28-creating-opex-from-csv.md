@@ -159,6 +159,10 @@ This option allows you to remove the additional column you may have added to sto
 
 ### Additional Namespaces
 
+This field allows you to specify any additional namespaces which may be needed. For example every column prefix will need an additional namespace.
 
 ![Spreadsheet Converter](/public/images/converter12.PNG)
 
+### Download 
+
+![Spreadsheet Converter](/public/images/converter13.PNG)
