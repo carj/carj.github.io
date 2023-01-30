@@ -92,6 +92,8 @@ After the CSV has been uploaded you need to select which column should be used t
 
 ###  Naming Convention
 
+![Spreadsheet Converter](/public/images/converter11.PNG)
+
 This is where you can decide on what type of metadata you would like to export.
 
 The first two options (.xml and .metatadata) create simple XML documents which would look like:
