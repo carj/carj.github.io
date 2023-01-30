@@ -53,31 +53,42 @@ For example, to create OAI-DC type metadata such as:
 
 ```xml
 
-     <oai_dc:dc
-         xmlns:dc="http://purl.org/dc/elements/1.1/"
-         xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/
-                             http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
-            <dc:title>Studies of Unicorn Behaviour</dc:title>
-            <dc:identifier>http://repository.example.org/2003292</dc:identifier>
-            <dc:creator>Jane, Doe</dc:creator>
-            <dc:creator>John, Doe</dc:creator>
-            <dc:description>
-                Lorem ipsum dolor...
-            </dc:description>
-            <dc:subject>info:eu-repo/classification/ddc/590</dc:subject>
-            <dc:subject>Unicorns</dc:subject>
-            <dc:source>Journal Of Unicorn Research</dc:source>
-            <dc:publisher>Unicorn Press</dc:publisher>
-            <dc:date>2013</dc:date>
-            <dc:type>info:eu-repo/semantics/article</dc:type>
-        </oai_dc:dc>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<opex:OPEXMetadata xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:opex="http://www.openpreservationexchange.org/opex/v1.2">
+	<opex:DescriptiveMetadata>
+		<oai_dc:dc>
+			<oai_dc:title>Title 001</oai_dc:title>
+			<oai_dc:creator>James Carr</oai_dc:creator>
+			<oai_dc:subject>Sheffield</oai_dc:subject>
+			<oai_dc:description/>
+			<oai_dc:publisher/>
+			<oai_dc:contributor/>
+			<oai_dc:date/>
+			<oai_dc:type/>
+			<oai_dc:format/>
+			<oai_dc:identifier/>
+			<oai_dc:source/>
+			<oai_dc:language/>
+			<oai_dc:rights/>
+		</oai_dc:dc>
+	</opex:DescriptiveMetadata>
+</opex:OPEXMetadata>
 
 ```
 
 The root element name is ```dc``` and the root element namespace is ```http://www.openarchives.org/OAI/2.0/oai_dc/```
 
 ![Spreadsheet Converter](/public/images/converter8.PNG)
+
+In this case the root element namespace and the Dublin Core elements should be in different namespaces, (15 term Dublin Core elements actually live inside the "http://purl.org/dc/elements/1.1/" namespace) so this is where we add a prefix to the column names, this allows us to associate additional namespaces to the prefixes.
+
+![Spreadsheet Converter](/public/images/converter9.PNG)
+
+
+### Formatting the Output
+
+After the CSV has been uploaded you need to select which column should be used to name the XML documents. This should be a column containing either the filename or other unique information 
+
+![Spreadsheet Converter](/public/images/converter10.PNG)
+
 
