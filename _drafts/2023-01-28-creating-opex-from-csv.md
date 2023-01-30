@@ -29,3 +29,13 @@ The spreadsheet column names can also contain prefixes, these can be used to add
 Prefixes can be useful for XML schema's such as Dublin Core where the XML attributes live inside a different namespace to the main XML root element.
 
 ![Spreadsheet Converter](/public/images/converter2.PNG)
+
+The metadata is added to the rows under the column headings 
+
+![Spreadsheet Converter](/public/images/converter5.PNG)
+
+and the spreadsheet should be exported to UTF-8 CSV.
+
+![Spreadsheet Converter](/public/images/converter6.PNG)
+
+
