@@ -38,4 +38,8 @@ and the spreadsheet should be exported to UTF-8 CSV.
 
 ![Spreadsheet Converter](/public/images/converter6.PNG)
 
+You are now ready to upload the metadata.
 
+### Namespaces
+
+The first field to enter on the website askes for a *Root Element* name
