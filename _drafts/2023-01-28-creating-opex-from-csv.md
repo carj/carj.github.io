@@ -148,4 +148,17 @@ The only difference being the file extension. The 3rd option wraps the XML in a 
 
 ```
 
+### XML Formatting
+
+This option allows you to format the XML to improve its readability by adding new lines and indenting elements.
+
+
+### Unique CSV Column
+
+This option allows you to remove the additional column you may have added to store the object filename that should not be part of the XML. For example if you added a filename column in the spreadsheet.
+
+### Additional Namespaces
+
+
+![Spreadsheet Converter](/public/images/converter12.PNG)
 
