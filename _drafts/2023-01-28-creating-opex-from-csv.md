@@ -24,6 +24,8 @@ You may also have a column which contains the name of the digital object to whic
 
 ![Spreadsheet Converter](/public/images/converter4.PNG)
 
-The spreadsheet column names can also contain prefixes, these can be used to add additional XML namespaces into the XML documents. This is useful for schema's such as Dublin Core where the XML attributes live inside a different namespace to the main XML root element.
+The spreadsheet column names can also contain prefixes, these can be used to add additional XML namespaces into the XML documents. The prefixes are seperated by ":" from XML attribute names.
+
+Prefixes can be useful for XML schema's such as Dublin Core where the XML attributes live inside a different namespace to the main XML root element.
 
 ![Spreadsheet Converter](/public/images/converter2.PNG)
