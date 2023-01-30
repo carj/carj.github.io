@@ -48,12 +48,12 @@ The first field to enter on the website askes for a *Root Element* name
 
 This field controls the name of the XML metadata root element. This is the element that all the spreadsheet column names are children of.
 
-For example, to create OAI-DC metadata such as:
+For example, to create OAI-DC type metadata such as:
 
 
 ```xml
 
-<oai_dc:dc
+     <oai_dc:dc
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -77,5 +77,7 @@ For example, to create OAI-DC metadata such as:
 
 ```
 
-The root element name is ```dc```
+The root element name is ```dc``` and the root element namespace is ```http://www.openarchives.org/OAI/2.0/oai_dc/```
+
+![Spreadsheet Converter](/public/images/converter8.PNG)
 
