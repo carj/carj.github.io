@@ -165,4 +165,10 @@ This field allows you to specify any additional namespaces which may be needed. 
 
 ### Download 
 
+Once the XML has been created, you are shown 4 download buttons.
+
 ![Spreadsheet Converter](/public/images/converter13.PNG)
+
+The first button downloads a ZIP file containing a metadata document for each row in the spreadsheet. The name of the XML document is taken from the column used to identify the row.
+
+
