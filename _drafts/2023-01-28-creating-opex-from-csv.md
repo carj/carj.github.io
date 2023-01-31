@@ -171,4 +171,5 @@ Once the XML has been created, you are shown 4 download buttons.
 
 The first button downloads a ZIP file containing a metadata document for each row in the spreadsheet. The name of the XML document is taken from the column used to identify the row.
 
+The other buttons allow you to downloads an XSD schema for your metadata template, a template to allow you to custom the search index and a basic CMIS transform to allow the metadata to be displayed in UA.
 
