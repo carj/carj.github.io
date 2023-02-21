@@ -191,3 +191,110 @@ search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
 
 
 If you want to limit your search to assets within a single folder, then you can use the parent reference filter, passing the reference of the folder of interest.
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open',  'xip.full_text': 'University’, 'xip.parent_ref': '123e4567-e89b-12d3-a456-426614174000'}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+If you want to search for objects within a folder hierarchy, i.e. recursively down the hierarchy then replace xip.parent_ref with the xip.parent_hierarchy index.
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open',  'xip.full_text': 'University’, 'xip.parent_hierarchy': '123e4567-e89b-12d3-a456-426614174000'}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+###  Providing Feedback
+
+
+Searching across a large Preservica repository is quick, but returning large datasets back to the client can be slow. To avoid putting undue load on the server pyPreservica will request a single page of results at a time for each server request. This paging is handled automatically by the pyPreservica client.
+
+If you are using the `simple_search_csv()` or `search_index_filter_csv()` functions which write directly to a CSV file then it can be difficult to monitor the report generation progress.
+
+To allow monitoring of search result downloads, you can add a Python call back object to the search client. The call back class will be called for every page of search results returned to the client. The value passed to the call back contains the total number of search hits for the query and the current number of results processed. The allows the current report progress to be displayed and updated on the console as the script is running.
+
+You can create your own call back functions or use the default provided by pyPreservica
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+search.search_callback(ReportProgressConsoleCallback())
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open',  'xip.full_text': 'University’, 'xip.parent_hierarchy': '123e4567-e89b-12d3-a456-426614174000'}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+This script will now display onto the console a message like:
+
+
+
+```python
+Progress: |██████████---------------------------------------------| (10.18%)
+```
+
+as the search progresses.
+
+### Counting Results
+
+Sometimes you don’t need the full search results, only the number of elements in the search results, i.e the search hit count.
+
+The number of hits can be evaluated using the `search_index_filter_hits()` function
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open',  'xip.full_text': 'University’, 'xip.parent_hierarchy': '123e4567-e89b-12d3-a456-426614174000'}
+
+hits = search.search_index_filter_hits("Oxford", "oxford-results.csv", filters)
+```
+
+Having the hit count can be useful for creating frequency histograms etc, the following is a simple python script which uses the pygal charting library to generate a histogram of the number of assets within a Preservica repository by security tag.
+
+The script first queries the API for a list of security tags used by the system and for each security tag, it uses the search API to fetch the number of assets which that tag.
+
+```python
+import pygal
+from pygal.style import BlueStyle
+
+from pyPreservica import *
+
+client = AdminAPI()
+search = ContentAPI()
+security_tags = client.security_tags()
+results = {}
+for tag in security_tags:
+    filters = {"xip.security_descriptor": tag, "xip.document_type": "IO"}
+    hits = search.search_index_filter_hits(query="%", filter_values=filters)
+    results[tag] = hits
+
+bar_chart = pygal.HorizontalBar(show_legend=False)
+bar_chart.title = "Security Tag Frequency"
+bar_chart.style = BlueStyle
+bar_chart.x_title = "Number of Assets"
+bar_chart.x_labels = results.keys()
+bar_chart.add("Security Tag", results)
+
+bar_chart.render_to_file("chart.svg")
+```
+
+![Report Output](/public/images/report-2.png)
