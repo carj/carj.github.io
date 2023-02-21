@@ -107,4 +107,87 @@ By default the spreadsheet columns correspond to the following indexes
 
 Once opened in Excel, then you can use the standard tools for filtering and sorting the tabulated data.
 
+![Report Output](/public/images/report-1.png)
 
+You can customise the CSV file and select your own spreadsheet columns by adding a list of indexes you would like to see in the output as the last argument of the function. For example you could search for the term “Oxford” across all the indexes and have the resulting CSV file include two Dublin core attributes as columns.
+
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+indexes = ['xip.reference', 'xip.title', 'oai_dc.identifier', 'oai_dc.subject']
+
+search.simple_search_csv("Oxford", "oxford-results.csv", indexes)
+```
+
+
+###  Fielded Reports
+
+This method described above works well as long as you want to query across all the available indexes, if you want to do more selective reporting such as filtering results based on specific index values then you need to use a different function search_index_filter_csv().
+
+To filter the results of the query you need to pass a Python dictionary rather than a simple list, the dictionary elements contain the index names as above and also the index values.
+
+For example, to only return Assets from the query we can filter on the xip.document_type index, assets are indexed using the term “IO” for intellectual objects and folders are indexed using “SO” for structural objects.
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO'}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+This returns a CSV document with a column for each filtered field.
+
+If you want to include additional columns in the resulting CSV file but don’t want to filter on their values, then leave the filter value empty, e.g.
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.title': '', 'xip.description': ''}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+To return only Assets with an open security tag we could use:
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open' }
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+This example queries for the term “Oxford” across all indexes and also filters for the term “University” within the full text index which has been extracted from the text within documents.
+
+It returns only assets which have the security tag “open”
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+
+filters = {'xip.document_type': 'IO', 'xip.security_descriptor': 'open',  'xip.full_text': 'University’}
+
+search.search_index_filter_csv("Oxford", "oxford-results.csv", filters)
+```
+
+
+If you want to limit your search to assets within a single folder, then you can use the parent reference filter, passing the reference of the folder of interest.
