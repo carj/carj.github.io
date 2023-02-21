@@ -43,7 +43,6 @@ This will print all the available indexes, The default indexes available in ever
 
 
 ```python
-…
 xip.format_r_Display
 xip.format_r_Preservation
 xip.full_text
@@ -53,7 +52,6 @@ xip.is_valid_r_Preservation
 xip.order_by
 xip.parent_hierarchy
 xip.parent_ref
-…
 ```
 
 If an index on a metadata attribute is not available, its straightforward to create a new index using a custom search configuration.
