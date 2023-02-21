@@ -20,3 +20,6 @@ Before using the search API, it’s a good idea to familiarize yourself with the
 
 You can determine the available indexed fields within a Preservica repository by calling the
 
+```rest
+/api/content/indexed-fields
+```
