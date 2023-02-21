@@ -61,3 +61,50 @@ If an index on a metadata attribute is not available, its straightforward to cre
 You can now use these indexes to create your search query.
 
 ### Simple Reports
+
+Using the raw REST API you would first create a JSON document containing the search terms and POST it to the endpoint.
+
+```rest
+/api/content/search
+```
+
+The JSON document syntax is described in the [Swagger documentation](https://eu.preservica.com/api/content/documentation.html#/%2F/post_search).
+
+Again to simplify the process we will use the pyPreservica client which creates the JSON document for you.
+
+To create a report using the basic “google” type search which searches across all the indexes we use the
+
+
+```python
+simple_search_csv() 
+```
+
+method.
+
+You can include any query term to search on, the special % character matches on everything in the repository.
+
+This function will search the Preservica repository for the term supplied in the query argument across all indexes and save the results into a UTF-8 CSV file which can be opened in MS Excel.
+
+For example, the following script will create a CSV file containing everything in the repository.
+
+
+
+```python
+from pyPreservica import *
+
+search = ContentAPI()
+search.simple_search_csv(query="%", csv_file="results.csv")
+```
+
+By default the spreadsheet columns correspond to the following indexes
+
+- xip.reference The entity reference of the asset or folder
+- xip.title The title of the asset or folder
+- xip.description The description of the asset or folder
+- xip.document_type The type of entity, e.g, “IO” for asset and “SO” for folder
+- xip.parent_ref The entity reference of the parent folder
+- xip.security_descriptor The security tag
+
+Once opened in Excel, then you can use the standard tools for filtering and sorting the tabulated data.
+
+
