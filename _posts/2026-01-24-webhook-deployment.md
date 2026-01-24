@@ -112,12 +112,27 @@ Once install we can run Zappa to detect the application and create our settings 
 
 ```console
 $ zappa init
+```
+
+Once you finish initialization, you'll have a file named zappa_settings.json in your project directory defining your basic deployment settings. It will probably look something like this for most WSGI apps:
+
+```json
+{
+    // The name of your stage
+    "dev": {
+        // The name of your S3 bucket
+        "s3_bucket": "lambda",
+        "app_function": "your_module.app"
+    }
+}
+```
+Once your settings are configured, you can package and deploy your application to AWS with a single command:
+
 ```console
-
-
-
-
-
+$ zappa deploy production
+Deploying..
+Your application is now live at: https://7k6anj0k99.execute-api.us-east-1.amazonaws.com/
+```
 
 
 
