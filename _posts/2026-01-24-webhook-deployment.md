@@ -50,5 +50,28 @@ pyPreservica is an open-source Python Software Development Kit (SDK) and client 
 pyPreservica is used to convert the messages from Preservica into Assets which can be processed.
 
 
+### Getting Started
+
+We are going to create a simple web application for receiving Preservica webhook notification and deploy it within AWS. 
 
 
+We will use a virtual environment to manage the dependencies for our project
+
+We will create a project folder called webhooks and a .venv folder within
+
+```console
+
+$ mkdir webhooks
+$ cd webhooks
+$ python3 -m venv .venv
+
+```
+
+Before you work on your project, activate the corresponding environment:
+
+
+```console
+
+$ . .venv/bin/activate
+
+```
