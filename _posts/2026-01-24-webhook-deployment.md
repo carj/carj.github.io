@@ -71,7 +71,29 @@ Before you work on your project, activate the corresponding environment:
 
 
 ```console
-
 $ . .venv/bin/activate
-
 ```
+
+Within the activated environment, use the following command to install Flask:
+
+```console
+$ pip install Flask
+```
+
+Flask is now installed. 
+
+
+The next step is to create the application logic, create a new file called app.py in the project folder and copy the following code into it:
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+```
+
+This will create a minimal application which will return a basic HTML string when a URL is accessed through a browser.
+
