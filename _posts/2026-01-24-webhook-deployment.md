@@ -40,3 +40,7 @@ Zappa is an open-source tool designed to "Lambda-fy" Python web applications. It
 
 Essentially, Zappa acts as a bridge: it packages your entire Python project, handles the complex AWS infrastructure setup, and translates incoming API Gateway requests into a format your Flask application can understand.
 
+By using Zappa you no longer need to login to AWS and deploy Lambda functions, API Gateways, IAM roles and all the AWS resources required to setup the serverless environment. No AWS knowledge is required.
+
+
+
