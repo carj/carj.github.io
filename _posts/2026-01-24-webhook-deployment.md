@@ -97,3 +97,28 @@ def index():
 
 This will create a minimal application which will return a basic HTML string when a URL is accessed through a browser.
 
+We are now going to deploy the test application to AWS using Zappa. Because we are going to deploy within AWS you will need
+a valid AWS account and some API keys in a credentials file.
+
+The [AWS crdentials file](https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/) should contain a ACCESS key and SECRET key.
+
+After you AWS credentials are setup we can deploy Zappa
+
+```console
+$ pip install zappa
+```
+
+Once install we can run Zappa to detect the application and create our settings file:
+
+```console
+$ zappa init
+```console
+
+
+
+
+
+
+
+
+
