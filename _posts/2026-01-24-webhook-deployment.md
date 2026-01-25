@@ -6,7 +6,8 @@ title: Automatic Deployment of Preservica Webhooks on AWS
 
 ### Introduction
 
-In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/), I described how Preservica uses webhooks to allow the creation of custom business processes. At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, and the manual effort required to deploy the supporting infrastructure.
+In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/) I described how Preservica uses webhooks to allow the creation of custom business processes. 
+At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, and the manual effort required to deploy the supporting infrastructure.
 
 This post describes a method to automate the process of creating the required [AWS services](https://aws.amazon.com), such as the AWS Lambda function and API Gateway.
 
@@ -125,5 +126,5 @@ Once your settings are configured, you can package and deploy your application t
 ```console
 $ zappa deploy production
 Deploying..
-Your application is now live at: https://7k6anj0k99.execute-api.us-east-1.amazonaws.com/
+Your application is now live at: https://7k6anj0k99.execute-api.us-east-1.amazonaws.com/dev
 ```
