@@ -14,7 +14,8 @@ This post describes a method to automate the process of creating the required [A
 ### Background
 
 We are going to use three Python projects: the web framework [Flask](https://flask.palletsprojects.com/en/stable/) to manage the application logic and create the web service which processes the messages from Preservica.  
-The interaction with Preservica will be done using [pyPreservica](https://pypreservica.readthedocs.io/en/latest/)
+The deployment of the Flask aplication to AWS including the creation of a Lambda function and the API Gateway will be done using [Zappa](https://github.com/zappa/Zappa). 
+The interaction with Preservica will be done using [pyPreservica](https://pypreservica.readthedocs.io/en/latest/).
 
 #### Flask
 
