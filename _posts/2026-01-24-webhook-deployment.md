@@ -7,15 +7,17 @@ title: Automatic Deployment of Preservica Webhooks on AWS
 ### Introduction
 
 In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/) I described how Preservica uses webhooks to allow the creation of custom business processes. 
-At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, and the manual effort required to deploy the supporting infrastructure.
+At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, 
+and the manual effort required to deploy the supporting infrastructure. We can reduce the cost and work of running dedicated hardware and
+web servers by using a serverless architecture within AWS but this does require a level of AWS knowledge to connect together all the required services.
 
 This post describes a method to automate the process of creating the required [AWS services](https://aws.amazon.com), such as the AWS Lambda function and API Gateway.
 
 ### Background
 
 We are going to use three Python projects: the web framework [Flask](https://flask.palletsprojects.com/en/stable/) to manage the application logic and create the web service which processes the messages from Preservica.  
-The deployment of the Flask aplication to AWS including the creation of a Lambda function and the API Gateway will be done using [Zappa](https://github.com/zappa/Zappa). 
-The interaction with Preservica will be done using [pyPreservica](https://pypreservica.readthedocs.io/en/latest/).
+The deployment of the Flask application to AWS including the creation of a Lambda function and the API Gateway will be done using [Zappa](https://github.com/zappa/Zappa). 
+The webhook handshake logic and the interaction with Preservica will be done using [pyPreservica](https://pypreservica.readthedocs.io/en/latest/).
 
 #### Flask
 
@@ -46,8 +48,9 @@ By using Zappa, you no longer need to log in to AWS and deploy Lambda functions,
 
 #### pyPreservica
 
-pyPreservica is an open-source Python Software Development Kit (SDK) and client library designed to interact with the Preservica API. It is the primary tool for archivists, developers, and records managers.  
-pyPreservica is used to convert the messages from Preservica into Assets that can be processed.
+pyPreservica is an open-source Python Software Development Kit (SDK) and client library designed to interact with the Preservica API. 
+It is the primary tool for archivists, developers, and records managers who want to use the Preservica API.
+pyPreservica is used to convert the messages from Preservica into Assets that can be processed within the webhook.
 
 ### Getting Started
 
@@ -113,11 +116,9 @@ Once you finish initialization, you'll have a file named `zappa_settings.json` i
 
 ```json
 {
-    // The name of your stage
     "dev": {
-        // The name of your S3 bucket
         "s3_bucket": "lambda",
-        "app_function": "your_module.app"
+        "app_function": "app.app"
     }
 }
 ```
@@ -125,7 +126,183 @@ Once you finish initialization, you'll have a file named `zappa_settings.json` i
 Once your settings are configured, you can package and deploy your application to AWS with a single command:
 
 ```console
-$ zappa deploy production
+$ zappa deploy dev
+```
+
+You should see some output followed by the deployed URL.
+
+```console
 Deploying..
 Your application is now live at: https://7k6anj0k99.execute-api.us-east-1.amazonaws.com/dev
 ```
+
+If you know visit the URL shown in your console, then you should see the text Hello, World! in the browser.
+
+### Validating the Messages
+
+During the webhook subscription process, Preservica will send a challenge response message to the specified endpoint URL to 
+verify that it exists and its publicly accessible.
+Preservica sends a POST request to the URL with a challengeCode query parameter. 
+The server must respond with the expected challenge response or the subscription will fail.
+
+The response sent back to Preservica takes the form of a simple json document which includes the original challenge code and a hexHmac256Response which is a hexadecimal encoded hmac256 of the challenge Code using the shared secret as the hmac key.
+
+We are going to add some boilerplate code into our web service to perform the handshake challenge.
+
+First we add pyPreservica to our Project:
+
+```console
+$ pip install pyPreservica
+```
+
+Now we can update the flask application to respond to the challenge.
+
+Since Preservica will only send webhook messages using HTTP POST, 
+we can limit our service to ignore other requests such as GET etc.
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def index():
+    return "<p>Hello, World!</p>"
+```
+
+The next step is to add the pyPreservica import statement and the FlaskWebhookHandler.
+
+
+```python
+import os
+from flask import Flask, request
+from pyPreservica import FlaskWebhookHandler
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def index():
+    webhook = FlaskWebhookHandler(request, os.environ.get('WEBHOOK_SECRET'))
+    if webhook.is_challenge():
+        return webhook.verify_challenge()
+
+    return webhook.response_ok()
+```
+
+The WEBHOOK_SECRET is an environment variable which contain a shared secret between the web hook service and
+the Preservica system. This can be used to verify any messages received by the web hook service did actually
+come from Preservica.
+
+The shared secret should be a strong password which cannot be guessed. To make sure the service can access
+the secret we will add it to the AWS environment variables.
+
+Update the zappa_settings.json file by adding a aws_environment_variables entry and your secret password.
+
+
+```json
+{
+    "dev": {
+        "s3_bucket": "lambda",
+        "app_function": "app.app",
+      
+        "aws_environment_variables": {
+          "WEBHOOK_SECRET": "EB9WJjYDkckyET3VM70r"
+        }
+    }
+}
+```
+
+We can update the application using 
+
+```console
+$ zappa update dev
+```
+
+### Creating the Subscription
+
+At this point we have a webhook service deployed in AWS waiting for a challenge request from Preservica. 
+The handshake only occurs when a new webhook subscription is created By preservica, so that is what we will do next.
+
+Create a new python script in a folder outside your project, create a pyPreservica WebHooksAPI API client and
+call the subscribe() function, pass the URL generated by zappa, the trigger type you want to subscribe to (Ingest events) 
+in this case and the webhook secret you created earlier.
+
+
+```python
+from pyPreservica import WebHooksAPI, TriggerType
+
+client = WebHooksAPI()
+
+sub = client.subscribe(url="https://7k6anj0k99.execute-api.us-east-1.amazonaws.com/dev", triggerType=TriggerType.INDEXED, secret="EB9WJjYDkckyET3VM70r")
+print(sub)
+```
+
+Run this script to create the subscription, from this point everything ingested into Preservica will trigger a webhook event.
+
+### Creating the Application
+
+We have a web hook application which can successfully respond to subscription requests, but cannot do much else. 
+The next step is to add some application logic to determine which Assets have been ingested.
+
+Update the Flask application code to process the incoming requests and use the Preservica Content API to fetch
+information about the objects.
+
+
+```python
+import os
+from flask import Flask, request
+from pyPreservica import FlaskWebhookHandler, ContentAPI
+
+client = ContentAPI()
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def index():
+    webhook = FlaskWebhookHandler(request, os.environ.get('WEBHOOK_SECRET'))
+    if webhook.is_challenge():
+        return webhook.verify_challenge()
+    else:
+        for obj_details in webhook.process_request():
+            entity = client.object_details(obj_details["entityType"], obj_details["entityRef"])
+            print(entity)
+
+    return webhook.response_ok()
+```
+
+This will print the details into the webhook logs of every entity, Asset or Folder which is ingested into Preservica.
+
+We can now update our AWS service again. But before we do we need to provide credentials to the pyPreservica library.
+
+Add your Preservica username, password and server hostname to the zappa_settings.json file within the
+aws environment variables parameter.
+
+```json
+{
+    "dev": {
+        "s3_bucket": "lambda",
+        "app_function": "app.app",
+      
+        "aws_environment_variables": {
+            "WEBHOOK_SECRET": "EB9WJjYDkckyET3VM70r",
+            "PRESERVICA_PASSWORD": "1234567",
+            "PRESERVICA_SERVER":  "uk.preservica.com",
+            "PRESERVICA_USERNAME": "email@test.com"
+        }
+    }
+}
+```
+
+Redeploy using zappa 
+
+
+```console
+$ zappa update dev
+```
+
+and we can monitor the AWS logs locally using:
+
+```console
+$ zappa tail
+```
+
