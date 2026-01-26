@@ -157,7 +157,7 @@ INFO:Waiting for lambda function [webhooks-dev] to be updated...
 Deployment complete!: https://8hxhcmrjd2.execute-api.us-east-1.amazonaws.com/dev
 ```
 
-If you know visit the URL shown in your console, then you should see the text Hello, World! in the browser.
+If you now visit the URL shown in your console, then you should see the text Hello, World! in the browser.
 
 ### Validating the Messages
 
