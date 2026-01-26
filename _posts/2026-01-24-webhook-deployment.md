@@ -363,14 +363,14 @@ Ingest a document into your preservica system, and you should see the details ap
 We now have a functioning web service which can validate subscriptions and handle Preservica events such as ingest etc.
 
 The next step is to build out your application, the following example fetches every 
-Asset thumbnail image and copies it to an S3 bucket for ingest new ingest. 
+thumbnail image and copies it to an S3 bucket for each new Asset ingest. 
 
 ```python
 import os
 import io
 from flask import Flask, request
 import boto3
-from pyPreservica import FlaskWebhookHandler, ContentAPI, EntityType
+from pyPreservica import FlaskWebhookHandler, ContentAPI, EntityType, Thumbnail
 
 client = ContentAPI()
 
