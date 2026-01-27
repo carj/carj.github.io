@@ -8,7 +8,9 @@ title: Automatic Deployment of Preservica Webhooks on AWS
 
 In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/) I described how Preservica can use webhook notifications to allow the creation of custom business processes. 
 At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, 
-and the manual effort required to deploy the supporting infrastructure. We can reduce the cost and work of running dedicated hardware and
+and the manual effort required to deploy the supporting infrastructure. 
+
+We can reduce the cost and work of running dedicated hardware and
 web servers by using a serverless architecture within AWS but this does require a level of AWS knowledge 
 to connect together all the required services. 
 With a serverless architecture you only pay for the milliseconds of server time that you use, 
@@ -303,10 +305,11 @@ We have a web hook application which can successfully respond to subscription re
 The next step is to add some application logic to determine which Assets have been ingested.
 
 Update the Flask application code to process the incoming requests and use the Preservica Content API to fetch
-information about the objects.
+information about the Preservica objects.
 
 The process_request() method is a generator which returns a dictionary for every object which is part of the webhook event.
-
+We can pass the entity type and entity ref from the Preservica event into the ContentAPI.object_details() method to
+get information about this Preservica object.
 
 
 ```python
@@ -331,7 +334,7 @@ def index():
     return webhook.response_ok()
 ```
 
-This will print the details into the webhook logs of every entity, Asset or Folder which is ingested into Preservica.
+This application will now print the details into the AWS logs of every entity, Asset or Folder which is ingested into Preservica.
 
 We can now update our AWS service again. But before we do we need to provide credentials to the pyPreservica library.
 
@@ -367,7 +370,7 @@ and we can monitor the AWS logs locally using:
 $ zappa tail
 ```
 
-Ingest a document into your preservica system, and you should see the details appear on the console.
+Ingest a document into your preservica system, and you should see the details appear on your console.
 
 
 ### Extending the Application
