@@ -1,21 +1,27 @@
 ---
 layout: post
-title: Automatic Deployment of Preservica Webhooks on AWS using Zappa
+title: Automatic Deployment of Preservica Webhooks on AWS
 
 ---
 
 ### Introduction
 
-In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/) I described how Preservica uses webhooks to allow the creation of custom business processes. 
+In a previous [post](https://jcarr.org.uk/2023/06/10/webhooks/) I described how Preservica can use webhook notifications to allow the creation of custom business processes. 
 At the end of the article I touched upon the challenges of hosting and securing webhook endpoints, 
 and the manual effort required to deploy the supporting infrastructure. We can reduce the cost and work of running dedicated hardware and
-web servers by using a serverless architecture within AWS but this does require a level of AWS knowledge to connect together all the required services.
+web servers by using a serverless architecture within AWS but this does require a level of AWS knowledge 
+to connect together all the required services. 
+With a serverless architecture you only pay for the milliseconds of server time that you use, 
+so it's many orders of magnitude cheaper than regular hosting options.
 
-This post describes a method to automate the process of creating the required [AWS services](https://aws.amazon.com), such as the AWS Lambda function and API Gateway.
+This post describes a method to simplify the development of web services which will receive the Preservica webbooks 
+and a method to automate the process of creating the required [AWS services](https://aws.amazon.com), 
+such as the AWS Lambda function and API Gateway. 
 
 ### Background
 
-We are going to use three Python projects: the web framework [Flask](https://flask.palletsprojects.com/en/stable/) to manage the application logic and create the web service which processes the messages from Preservica.  
+We are going to use three Python projects: the web framework [Flask](https://flask.palletsprojects.com/en/stable/) to manage the application logic and create 
+the web service which processes the messages from Preservica.  
 The deployment of the Flask application to AWS including the creation of a Lambda function and the API Gateway will be done using [Zappa](https://github.com/zappa/Zappa). 
 The webhook handshake logic and the interaction with Preservica will be done using [pyPreservica](https://pypreservica.readthedocs.io/en/latest/).
 
@@ -166,9 +172,12 @@ verify that it exists and its publicly accessible.
 Preservica sends a POST request to the URL with a challengeCode query parameter. 
 The server must respond with the expected challenge response or the subscription will fail.
 
-The response sent back to Preservica takes the form of a simple json document which includes the original challenge code and a hexHmac256Response which is a hexadecimal encoded hmac256 of the challenge Code using the shared secret as the hmac key.
+The response sent back to Preservica takes the form of a simple json document which includes the original challenge 
+code and a hexHmac256Response which is a hexadecimal encoded hmac256 of the challenge Code using the shared secret as the hmac key.
 
-We are going to add some boilerplate code into our web service to perform the handshake challenge.
+In the previous post on Preservica webhooks we showed how we could write code to manage this verification process 
+directly within a AWS Lambda function, in this example we are going to add some simple calls into the 
+pyPreservica library into our web service to perform the handshake challenge.
 
 First we add pyPreservica to our Project:
 
@@ -178,8 +187,7 @@ $ pip install pyPreservica
 
 Now we can update the flask application to respond to the challenge.
 
-Since Preservica will only send webhook messages using HTTP POST, 
-we can limit our service to ignore other requests such as GET etc.
+Since Preservica will only send webhook messages using HTTP POST, we can limit our service to ignore other requests such as GET etc.
 
 ```python
 from flask import Flask
@@ -209,8 +217,9 @@ def index():
 
     return webhook.response_ok()
 ```
+We can now test for initial handshake and return the message Preservica is expecting to allow the successful registration of the webhook.
 
-The WEBHOOK_SECRET is an environment variable which contain a shared secret between the web hook service and
+The WEBHOOK_SECRET is an environment variable which contains a shared secret between the web hook service and
 the Preservica system. This can be used to verify any messages received by the web hook service did actually
 come from Preservica.
 
@@ -295,6 +304,9 @@ The next step is to add some application logic to determine which Assets have be
 
 Update the Flask application code to process the incoming requests and use the Preservica Content API to fetch
 information about the objects.
+
+The process_request() method is a generator which returns a dictionary for every object which is part of the webhook event.
+
 
 
 ```python
@@ -385,9 +397,8 @@ def index():
     else:
         s3_client: boto3.s3 = boto3.client('s3')
         for obj_details in webhook.process_request():
-            entity = client.object_details(obj_details["entityType"], obj_details["entityRef"])
             if obj_details["entityType"] == EntityType.ASSET.value:
-                buffer: io.BytesIO = client.thumbnail_bytes(entity.entity_type, entity.reference, Thumbnail.MEDIUM)
+                buffer: io.BytesIO = client.thumbnail_bytes(obj_details["entityType"], obj_details["entityRef"], Thumbnail.MEDIUM)
                 s3_client.put_object(Bucket="my_s3_bucket", Key=f"{obj_details["entityRef"]}/thumbnail.png", Body=buffer.getvalue())
                 
 
