@@ -170,7 +170,7 @@ If you now visit the URL shown in your console, then you should see the text Hel
 ### Validating the Messages
 
 During the webhook subscription process, Preservica will send a challenge response message to the specified endpoint URL to 
-verify that it exists and its publicly accessible.
+verify that it exists, and it's publicly accessible.
 Preservica sends a POST request to the URL with a challengeCode query parameter. 
 The server must respond with the expected challenge response or the subscription will fail.
 
