@@ -13,6 +13,10 @@ I am the creator and maintainer of a few open source tools for Preservica users,
 
 * [pyPreservica](https://pypreservica.readthedocs.io/) Python SDK for Preservica.
 * [CSV to XML](https://pypreservica.pythonanywhere.com/)  Spreadsheet Converter
+* [pyPreservicaFSDate](https://github.com/carj/pyPreservicaFSDate) Add filesystem dates to Preservica metadata.
+* [preservica-ocfl](https://github.com/carj/preservica-ocfl) Create a local OCFL repository from a Preservica export.
+* [preserva-tweet](https://github.com/carj/preserva-tweet) Ingest Tweets from a Twitter Export into Preservica.
+* [pyPreservica.Gov](https://github.com/carj/pyPreservica.Gov) Python Library For Harvesting Modern.Gov Records into Preservica.
 
 
 
