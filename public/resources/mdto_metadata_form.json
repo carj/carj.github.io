@@ -1,0 +1,344 @@
+{
+  "title": "MDTO",
+  "description": "(MDTO) v1.0.1",
+  "schemaUri": "https://www.nationaalarchief.nl/mdto",
+  "default": "True",
+  "fields": [
+      {
+        "label": "Identification Reference",
+        "path": "//ns:MDTO/ns:informatieobject/ns:identificatie/ns:identificatieKenmerk",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Identification Source",
+        "path": "//ns:MDTO/ns:informatieobject/ns:identificatie/ns:identificatieBron",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Name",
+        "path": "//ns:MDTO/*/ns:naam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Aggregation Level",
+        "path": "//ns:MDTO/ns:informatieobject/ns:aggregatieniveau/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+    {
+        "label": "Aggregation Level Code",
+        "path": "//ns:MDTO/ns:informatieobject/ns:aggregatieniveau/ns:begripCode",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Classification",
+        "path": "//ns:MDTO/ns:informatieobject/ns:classificatie/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Keyword",
+        "path": "//ns:MDTO/ns:informatieobject/ns:trefwoord",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Description",
+        "path": "//ns:MDTO/ns:informatieobject/ns:omschrijving",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+    {
+        "label": "Language",
+        "path": "//ns:MDTO/ns:informatieobject/ns:taal",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Temporal Coverage Type",
+        "path": "//ns:MDTO/ns:informatieobject/ns:dekkingInTijd/ns:dekkingInTijdType/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Temporal Coverage Start Date",
+        "path": "//ns:MDTO/ns:informatieobject/ns:dekkingInTijd/ns:dekkingInTijdBegindatum",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Temporal Coverage End Date",
+        "path": "//ns:MDTO/ns:informatieobject/ns:dekkingInTijd/ns:dekkingInTijdEinddatum",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Spatial Coverage",
+        "path": "//ns:MDTO/ns:informatieobject/ns:dekkingInRuimte/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Appraisal",
+        "path": "//ns:MDTO/ns:informatieobject/ns:waardering/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Appraisal Code",
+        "path": "//ns:MDTO/ns:informatieobject/ns:waardering/ns:begripCode",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+    {
+        "label": "Retention Period Duration",
+        "path": "//ns:MDTO/ns:informatieobject/ns:bewaartermijn/ns:termijnLooptijd",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Retention End Date",
+        "path": "//ns:MDTO/ns:informatieobject/ns:bewaartermijn/ns:termijnEinddatum",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Retention Trigger",
+        "path": "//ns:MDTO/ns:informatieobject/ns:bewaartermijn/ns:termijnTriggerStartLooptijd/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Information Category",
+        "path": "//ns:MDTO/ns:informatieobject/ns:informatiecategorie/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Record Creator Name",
+        "path": "//ns:MDTO/ns:informatieobject/ns:archiefvormer/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Record Creator Identifier",
+        "path": "//ns:MDTO/ns:informatieobject/ns:archiefvormer/ns:verwijzingIdentificatie/ns:identificatieKenmerk",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Involved Party  Relationship Type",
+        "path": "//ns:MDTO/ns:informatieobject/ns:betrokkene/ns:betrokkeneTypeRelatie/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Involved Party  Actor Name",
+        "path": "//ns:MDTO/ns:informatieobject/ns:betrokkene/ns:betrokkeneActor/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Business Activity",
+        "path": "//ns:MDTO/ns:informatieobject/ns:activiteit/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Use Restriction Type",
+        "path": "//ns:MDTO/ns:informatieobject/ns:beperkingGebruik/ns:beperkingGebruikType/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Use Restriction Description",
+        "path": "//ns:MDTO/ns:informatieobject/ns:beperkingGebruik/ns:beperkingGebruikNadereBeschrijving",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+     {
+        "label": "Use Restriction End Date",
+        "path": "//ns:MDTO/ns:informatieobject/ns:beperkingGebruik/ns:beperkingGebruikTermijn/ns:termijnEinddatum",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Use Restriction Documentation",
+        "path": "//ns:MDTO/ns:informatieobject/ns:beperkingGebruik/ns:beperkingGebruikDocumentatie/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Is Part Of",
+        "path": "//ns:MDTO/ns:informatieobject/ns:isOnderdeelVan/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Contains Part",
+        "path": "//ns:MDTO/ns:informatieobject/ns:bevatOnderdeel/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Has Representation",
+        "path": "//ns:MDTO/ns:informatieobject/ns:heeftRepresentatie/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Related Information Object",
+        "path": "//ns:MDTO/ns:informatieobject/ns:gerelateerdInformatieobject/ns:gerelateerdInformatieobjectVerwijzing/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Related Object  Relationship Type",
+        "path": "//ns:MDTO/ns:informatieobject/ns:gerelateerdInformatieobject/ns:gerelateerdInformatieobjectTypeRelatie/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+     {
+        "label": "Online Consultation Location",
+        "path": "//ns:MDTO/ns:informatieobject/ns:raadpleeglocatie/ns:raadpleeglocatieOnline",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Physical Consultation Location",
+        "path": "//ns:MDTO/ns:informatieobject/ns:raadpleeglocatie/ns:raadpleeglocatieFysiek/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Event Type",
+        "path": "//ns:MDTO/ns:informatieobject/ns:event/ns:eventType/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Event Date/Time",
+        "path": "//ns:MDTO/ns:informatieobject/ns:event/ns:eventTijd",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Event Responsible Actor",
+        "path": "//ns:MDTO/ns:informatieobject/ns:event/ns:eventVerantwoordelijkeActor/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Event Result",
+        "path": "//ns:MDTO/ns:informatieobject/ns:event/ns:eventResultaat",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "File Size bytes",
+        "path": "//ns:MDTO/ns:bestand/ns:omvang",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "File Format",
+        "path": "//ns:MDTO/ns:bestand/ns:bestandsformaat/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "File Format Code",
+        "path": "//ns:MDTO/ns:bestand/ns:bestandsformaat/ns:begripCode",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Checksum Algorithm",
+        "path": "//ns:MDTO/ns:bestand/ns:checksum/ns:checksumAlgoritme/ns:begripLabel",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Checksum Value",
+        "path": "//ns:MDTO/ns:bestand/ns:checksum/ns:checksumWaarde",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Checksum Date",
+        "path": "//ns:MDTO/ns:bestand/ns:checksum/ns:checksumDatum",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "File URL",
+        "path": "//ns:MDTO/ns:bestand/ns:URLBestand",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Is Representation Of",
+        "path": "//ns:MDTO/ns:bestand/ns:isRepresentatieVan/ns:verwijzingNaam",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      },
+      {
+        "label": "Is Representation Of  Identifier",
+        "path": "//ns:MDTO/ns:bestand/ns:isRepresentatieVan/ns:verwijzingIdentificatie/ns:identificatieKenmerk",
+        "type": "String",
+        "visible": "True",
+        "editable": "True"
+      }
+  ]
+}
