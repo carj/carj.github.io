@@ -46,6 +46,9 @@ your script can still fire all 60 uploads in rapid succession — it will then b
 requests are more than 60 seconds old and slots become available again. The constraint is on
 *how many* uploads happen per minute, not *when within* that minute they happen.
 
+The rate limiting does not impact the upload speed to Preservica, this still happens as fast as your
+network allows, the rate limiting is only impacting the number of uploads per minute.
+
 The new function signature is:
 
 ```python
